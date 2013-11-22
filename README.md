@@ -1,6 +1,8 @@
 Django URL History
 ==================
 
+[![Build Status](https://travis-ci.org/brightinteractive/django-url-history.png)](https://travis-ci.org/brightinteractive/django-url-history)
+
 **Store the last few URLs visited in the session and then log them in the `server_error` view, to aid debugging.**
 
 **Author:** [Bright Interactive][1].
