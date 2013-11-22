@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"> 
+    <head>
+        <title>500 Error</title>
+    </head>
+    <body>
+        <h1>Error (500)</h1>
+        <h2>There was a problem serving the requested page.</h2>
+        <p>This usually means that an unexpected error occurred while processing your request. Here's what you can try next:</p>
+        <p><a href="#" onclick="location.reload(); return false;">Refresh the page</a>, the problem may be temporary.</p>
+        <p>
+            If the problem persists, <a id="id_contact_us" href="mailto:{{ SUPPORT_EMAIL_ADDRESS }}{% if error_id %}?subject={{ PROJECT_NAME|urlencode }}%20Error:%20{{ error_id }}{% endif %}">contact us</a>{% if error_id %}, quoting error ID {{ error_id }},{% endif %}
+            and we'll help you get on your way.
+        </p>
+    </body>
+</html>
