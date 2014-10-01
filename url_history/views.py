@@ -26,8 +26,11 @@ def server_error(request, template_name='500.html', data=None):
     """
 
     error_id = str(uuid.uuid4())
-    logger.error('Error ID: %s. URLs leading up to this error: %s',
-        error_id, url_history(request.session))
+    error_message = 'Error ID: %s' % error_id
+    if hasattr(request, 'session'):
+        error_message = '%s. URLs leading up to this error: %s' % (
+            error_message, url_history(request.session))
+    logger.error(error_message)
 
     t = loader.get_template(template_name)
 
