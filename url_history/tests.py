@@ -9,8 +9,8 @@ bug reports.
 
 from django.core.urlresolvers import reverse
 from url_history.models import url_history
+from url_history.views import server_error
 import django.test
-
 
 class TestCase(django.test.TestCase):
     tags = ['service', ]
@@ -99,3 +99,14 @@ class HistoryServerErrorViewTests(TestCase):
         self.assertEqual(500, response.status_code)
         error_id = response.context['error_id']
         return error_id
+
+    def test_handles_error_before_session_middleware(self):
+        # request.session can be undefined if an error is hit on the user's
+        # first request prior to the session middleware being reached
+        request_factory = django.test.client.RequestFactory()
+        request = request_factory.get(reverse('test-server-error'))
+        try:
+            error_id = server_error(request)
+            self.assertIsNotNone(error_id)
+        except AttributeError as e:
+            self.fail('Should handle requests with no session gracefully: %s' % e)
