@@ -50,6 +50,17 @@ You can then add a server_error view to your app's `views.py` which will log the
 Publishing releases to PyPI
 ===========================
 
+Only Bright Interactive employees can publish a release. Ensure you have a .pypirc file in your home directory configured to publish to the bright PyPI account (real password has been redacted).
+
+```
+[pypirc]
+servers = pypi
+
+[server-login]
+username:bright
+password:******
+```
+
 To publish a new version of django-url-history to PyPI, set the `__version__` 
 string in `url_history/__init__.py`, then run:
 
